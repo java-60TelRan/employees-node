@@ -12,7 +12,7 @@ export class EmployeeNotFoundError extends Error {
          Object.setPrototypeOf(this, EmployeeNotFoundError.prototype)
     }
 }
-export default class EmployeesServiceMap implements EmployeesService {
+ class EmployeesServiceMap implements EmployeesService {
      private _employees: Map<string, Employee> = new Map();
     addEmployee(empl: Employee): Employee {
         const id = empl.id ?? (empl.id = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`)
@@ -49,3 +49,5 @@ export default class EmployeesServiceMap implements EmployeesService {
         return employee;
     }
 }
+const service: EmployeesService = new EmployeesServiceMap();
+export default service;

@@ -2,13 +2,14 @@ import express, { NextFunction, Request, Response } from 'express'
 import morgan from 'morgan'
 import 'dotenv/config'
 import _ from 'lodash'
-import EmployeesServiceMap, { EmployeeAlreadyExistsError, EmployeeNotFoundError } from '../service/EmployeesServiceMap.ts';
+import  { EmployeeAlreadyExistsError, EmployeeNotFoundError } from '../service/EmployeesServiceMap.ts';
 import EmployeesService from '../service/EmployeesService.ts';
 import { Employee } from '../model/Employee.ts';
+import service from '../service/EmployeesServiceMap.ts';
 const app = express();
 const {PORT, MORGAN_FORMAT, SKIP_CODE_THRESHOLD} = process.env;
 const port = PORT || 3500;
-const service: EmployeesService = new EmployeesServiceMap();
+
 const morganFormat = MORGAN_FORMAT ?? 'tiny';
 const skipCodeThreshold = SKIP_CODE_THRESHOLD ??  400;
 const server = app.listen(port, () => console.log("server is listening on port "+ port))
@@ -42,3 +43,9 @@ app.use((error: Error, __: Request, res: Response, ___: NextFunction) => {
     res.send(error.message)
     
 })
+function shutdown() {
+    //graceful shutdown
+    server.close(() => console.log("server closed"));
+}
+process.on("SIGINT", shutdown);
+process.on("SIGTERM", shutdown)
