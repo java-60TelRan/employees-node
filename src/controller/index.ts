@@ -3,7 +3,6 @@ import morgan from 'morgan'
 import 'dotenv/config'
 import _ from 'lodash'
 import  { EmployeeAlreadyExistsError, EmployeeNotFoundError } from '../service/EmployeesServiceMap.ts';
-import EmployeesService from '../service/EmployeesService.ts';
 import { Employee } from '../model/Employee.ts';
 import service from '../service/EmployeesServiceMap.ts';
 const app = express();
