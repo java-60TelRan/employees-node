@@ -6,6 +6,7 @@
 2. 403 code if role dismathes route functionality <br>
 3. continuation of request pipeline processing
 ### Appropriate Updating index.ts
+### Appropriate Updating errors handler
 ### There should be following AAA rules
 1. Getting employees  - authentication is required, may be performed for either ADMIN or USER <br>
 2. Adding, updating, deleting employees - authentication is required, may be performed for only ADMIN
