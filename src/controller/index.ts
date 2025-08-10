@@ -8,6 +8,8 @@ import { errorsHandler } from "../middeware/errors-handling/handler.ts";
 import validation from "../middeware/validation/validation.ts";
 import { EmployeeSchema } from "../middeware/validation/schemas.ts";
 import {  getRandomEmployee, getRandomEmployees } from "../utils/service-helpers.ts";
+import accountingService from "../service/AccountingServiceMap.ts";
+import { authenticate } from "../middeware/auth/auth.ts";
 
 
 const { PORT, MORGAN_FORMAT, SKIP_CODE_THRESHOLD } = process.env;
@@ -45,6 +47,9 @@ app.patch(
     res.json(service.updateEmployee(req.params.id, req.body));
   }
 );
+app.post("/login", (req, res) => {
+    res.send(accountingService.login(req.body))
+})
 app.use(errorsHandler);
 function shutdown() {
   //graceful shutdown
