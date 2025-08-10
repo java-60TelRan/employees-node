@@ -3,7 +3,7 @@
 ### Introduce middleware function auth (woring out the function parameter and usage )
 #### This middleware has to make decision out of the following options
 1. 401 code if either no token or invalid token <br>
-2. 403 code if role dismathes route functionality <br>
+2. 403 code if role mismatches route functionality <br>
 3. continuation of request pipeline processing
 ### Appropriate Updating index.ts
 ### Appropriate Updating errors handler
