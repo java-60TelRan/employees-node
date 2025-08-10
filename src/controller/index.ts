@@ -7,7 +7,7 @@ import service from "../service/EmployeesServiceMap.ts";
 import { errorsHandler } from "../middeware/errors-handling/handler.ts";
 import validation from "../middeware/validation/validation.ts";
 import { EmployeeSchema } from "../middeware/validation/schemas.ts";
-import { generateEmployees, getRandomEmployee } from "../utils/service-helpers.ts";
+import {  getRandomEmployee, getRandomEmployees } from "../utils/service-helpers.ts";
 
 
 const { PORT, MORGAN_FORMAT, SKIP_CODE_THRESHOLD } = process.env;
@@ -56,7 +56,10 @@ function shutdown() {
 process.on("SIGINT", shutdown);
 process.on("SIGTERM", shutdown);
 if (process.env.NODE_ENV !== "production") {
-   generateEmployees();
+   if (service.getAll().length === 0) {
+    const employees = getRandomEmployees();
+    employees.forEach(empl => service.addEmployee(empl));
+   }
 }
 
 

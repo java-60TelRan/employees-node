@@ -1,14 +1,13 @@
 import { faker } from '@faker-js/faker'
 import { Employee } from '../model/Employee.ts';
-import service from '../service/EmployeesServiceMap.ts';
-import { getDepartments, getMaxAge, getMaxSalary, getMinAge, getMinSalary } from "../utils/config_functions.ts";
+import { getDepartments, getMaxAge, getMaxSalary, getMinAge, getMinSalary } from "./config_functions.ts";
 const N_RANDOM_EMPLOYEES = 20;
 export function getId(): string {
     return `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
   }
- export  function generateEmployees() {
+ export  function getRandomEmployees() {
     const employees: Employee[] = Array.from({ length: N_RANDOM_EMPLOYEES }, getRandomEmployee);
-    employees.forEach(empl => service.addEmployee(empl));
+    return employees;
   }
   export function getRandomEmployee(): Employee {
     const res: Employee = {} as Employee;
