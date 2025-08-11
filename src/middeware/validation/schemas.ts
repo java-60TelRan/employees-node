@@ -16,16 +16,11 @@ export const EmployeeSchema = z.object({
     val =>departments.has(val),
     { message: `must be one out of ${Array.from(departments.values())}` }
   ),
-  birthDate: z.string().refine(
-    (val) => {
-      const date = new Date(val);
-      return (
-        val === date.toISOString().slice(0, 10) &&
-        val >= getMinDate() &&
-        val <= getMaxDate()
-      );
-    },
+  birthDate: z.iso.date().refine(
+    val => val >= getMinDate() &&
+        val <= getMaxDate() ,
     { message: `must be ISO date from ${getMinDate()} to ${getMaxDate()}]` }
   ),
   salary: z.number().int().min(getMinSalary()).max(getMaxSalary()),
 });
+export const EmployeeSchemaPartial = EmployeeSchema.partial();

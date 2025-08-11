@@ -6,8 +6,8 @@ import { Employee } from "../model/Employee.ts";
 import service from "../service/EmployeesServiceMap.ts";
 import { errorsHandler } from "../middeware/errors-handling/handler.ts";
 import validation from "../middeware/validation/validation.ts";
-import { EmployeeSchema } from "../middeware/validation/schemas.ts";
-import {  getRandomEmployee, getRandomEmployees } from "../utils/service-helpers.ts";
+import { EmployeeSchema, EmployeeSchemaPartial } from "../middeware/validation/schemas.ts";
+import {   getRandomEmployees } from "../utils/service-helpers.ts";
 import accountingService from "../service/AccountingServiceMap.ts";
 import { authenticate } from "../middeware/auth/auth.ts";
 
@@ -42,7 +42,7 @@ app.delete("/employees/:id", (req, res) => {
 //Updating employee
 app.patch(
   "/employees/:id",
-  validation(EmployeeSchema.partial()),
+  validation(EmployeeSchemaPartial),
   (req, res) => {
     res.json(service.updateEmployee(req.params.id, req.body));
   }
