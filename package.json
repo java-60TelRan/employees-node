@@ -11,8 +11,10 @@
   },
   "dependencies": {
     "@faker-js/faker": "^9.9.0",
+    "@types/cors": "^2.8.19",
     "@types/jsonwebtoken": "^9.0.10",
     "bcrypt-ts": "^7.1.0",
+    "cors": "^2.8.5",
     "dotenv": "^17.2.1",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",

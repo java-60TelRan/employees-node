@@ -1,5 +1,6 @@
 import Account from "../model/dto-types/Account.ts";
 import LoginData from "../model/dto-types/LoginData.ts";
+import LoginResponse from "../model/dto-types/LoginResponse.ts";
 import JwtUtil from "../security/JwtUtil.ts";
 import AccountingService from "./AccountingService.ts";
 import { compareSync } from "bcrypt-ts";
@@ -17,13 +18,19 @@ class AccountingServiceMap implements AccountingService {
       password: "$2a$10$OBu/N8Q0WVw64T7pLkUPiOY7gBsz..VfCQswHsp.Iu3yGfSkWOaZy",
     });
   }
-  login(loginData: LoginData): string {
+  login(loginData: LoginData): LoginResponse {
     const account: Account = this._accounts.get(loginData.email);
 
     if (!account || !compareSync(loginData.password, account.password)) {
       throw new Error("Wrong credentials");
     }
-    return JwtUtil.getJWT(account);
+    return {
+      accessToken: JwtUtil.getJWT(account),
+      user: {
+        email: account.username,
+        id: account.role
+      }
+    };
   }
 }
 const accountingService = new AccountingServiceMap();

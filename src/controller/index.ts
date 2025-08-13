@@ -13,7 +13,7 @@ import {
 import { getRandomEmployees } from "../utils/service-helpers.ts";
 import accountingService from "../service/AccountingServiceMap.ts";
 import { auth, authenticate } from "../middeware/auth/auth.ts";
-
+import cors from 'cors'
 const { PORT, MORGAN_FORMAT, SKIP_CODE_THRESHOLD } = process.env;
 const port = PORT || 3500;
 
@@ -25,12 +25,13 @@ const server = app.listen(port, () =>
 );
 const allAuth: RequestHandler = auth(["USER", "ADMIN"]);
 const adminAuth: RequestHandler = auth(["ADMIN"]);
-
+app.use(cors())
 app.use(
   morgan(morganFormat, {
     skip: (_, res) => res.statusCode < +skipCodeThreshold,
   })
 );
+
 app.use(authenticate);
 app.use(express.json());
 
@@ -51,7 +52,7 @@ app.patch("/employees/:id", adminAuth, validation(EmployeeSchemaPartial), (req, 
   res.json(service.updateEmployee(req.params.id, req.body));
 });
 app.post("/login", (req, res) => {
-  res.send(accountingService.login(req.body));
+  res.json(accountingService.login(req.body));
 });
 app.use(errorsHandler);
 function shutdown() {
