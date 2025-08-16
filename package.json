@@ -8,7 +8,7 @@
   "main": "index.ts",
   "scripts": {
     "dev": "nodemon",
-    "test-controller": "node --test --no-warnings --loader ts-node/esm src/controller/index.test.ts"
+    "test-controller": "node  --test --no-warnings --loader ts-node/esm --env-file=envTest.test.env src/controller/index.test.ts"
   },
   "dependencies": {
    
