@@ -2,9 +2,9 @@ import { Employee } from "../model/dto-types/Employee.ts";
 import EmployeesService from "./EmployeesService.ts";
 import fs from "node:fs";
 import path from "node:path";
-import EmployeesServiceMock from "./EmployeesServiceMock.test.ts";
 import { getId } from "../utils/service-helpers.ts";
 import { EmployeeAlreadyExistsError, EmployeeNotFoundError } from "../model/error-types/employee-error.ts";
+import { registerEmployeesService } from "./registry.ts";
 const DEFAULT_FILE_NAME = "employees.data";
 
 class EmployeesServiceMap implements EmployeesService {
@@ -72,5 +72,4 @@ class EmployeesServiceMap implements EmployeesService {
     }
   }
 }
-const service: EmployeesService = process.env.NODE_TEST_CONTEXT ? new EmployeesServiceMock() : new EmployeesServiceMap();
-export default service;
+registerEmployeesService("map", async (_) => new EmployeesServiceMap())

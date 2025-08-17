@@ -1,5 +1,6 @@
-import { Employee } from "../model/dto-types/Employee";
-import EmployeesService from "./EmployeesService";
+import { Employee } from "../model/dto-types/Employee.ts";
+import EmployeesService from "./EmployeesService.ts";
+import { registerEmployeesService } from "./registry.ts";
 export default class EmployeesServiceMock implements EmployeesService {
     async addEmployee(empl: Employee): Promise<Employee> {
         return {} as Employee
@@ -18,3 +19,4 @@ export default class EmployeesServiceMock implements EmployeesService {
     }
     
 }
+registerEmployeesService("mock", async (_) => new EmployeesServiceMock())

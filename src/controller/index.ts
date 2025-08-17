@@ -2,7 +2,7 @@
 import "dotenv/config";
 import _ from "lodash";
 
-import service from "../service/EmployeesServiceMap.ts";
+import service from "../service/bootstrap.ts";
 
 import { getRandomEmployees } from "../utils/service-helpers.ts";
 

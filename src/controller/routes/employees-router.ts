@@ -1,7 +1,7 @@
 import express, {RequestHandler, Router} from 'express';
 import { Employee } from "../../model/dto-types/Employee.ts";
 import validation from "../../middeware/validation/validation.ts";
-import service from "../../service/EmployeesServiceMap.ts";
+import service from "../../service/bootstrap.ts";
 import {
   EmployeeSchema,
   EmployeeSchemaPartial,
