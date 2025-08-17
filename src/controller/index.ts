@@ -27,7 +27,7 @@ function shutdown() {
 process.on("SIGINT", shutdown);
 process.on("SIGTERM", shutdown);
 if (process.env.NODE_ENV !== "production") {
-  if (service.getAll().length === 0) {
+  if ((await service.getAll()).length === 0) {
     const employees = getRandomEmployees();
     employees.forEach((empl) => service.addEmployee(empl));
   }
