@@ -1,5 +1,5 @@
 import service from "./bootstrap.ts";
-import test, { beforeEach } from "node:test";
+import test, { beforeEach, after } from "node:test";
 import assert from "node:assert/strict";
 import { Employee } from "../model/dto-types/Employee.ts";
 import { EmployeeAlreadyExistsError, EmployeeNotFoundError } from "../model/error-types/employee-error.ts";
@@ -38,6 +38,7 @@ const stateEmployees: Employee[] = [
     fullName: "Full Name",
   },
 ];
+after(async() => await service.save())
 beforeEach(async () => {
   const array: Employee[] = await service.getAll();
   for (let empl of array) {
