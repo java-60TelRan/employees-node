@@ -24,6 +24,7 @@ export default abstract class AbstractEmployeesServiceSql
         table.string("department");
         table.string("birthDate");
         table.integer("salary");
+        table.index(["department"]) //creating index for better performence of queries by department
       });
     }
   }
