@@ -15,6 +15,7 @@ class EmployeesServiceMongoInMemory extends AbstractEmployeesServiceMongo {
 }
 registerEmployeesService("mongoInMemory", async () => {
     const mongoMemoryServer = new MongoMemoryServer();
+   await mongoMemoryServer.start()
     const uri = mongoMemoryServer.getUri();
     const serviceInstance = new EmployeesServiceMongoInMemory(uri,
          EMPLOYEES_DB_NAME, EMPLOYEES_COLLECTION, mongoMemoryServer);
